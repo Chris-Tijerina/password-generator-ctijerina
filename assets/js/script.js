@@ -9,6 +9,10 @@ function writePassword() {
 
   //criteria variables
   var lowerCase = window.prompt ("Do you want lowercase letters? yes or no")
+  if (lowerCase.toLowerCase() != "yes" && lowerCase.toLowerCase() != "no"){
+    window.alert("You did not pick a valid option. Try again.")
+    
+  }
   var upperCase = window.prompt ("Do you want upppercase letters? yes or no")
   var numeric = window.prompt ("Do you want numeric values? yes or no")
   var special = window.prompt ("Do you want special characters? yes or no")
@@ -17,11 +21,9 @@ function writePassword() {
   
   var password = generatePassword(length, lowerCase, upperCase, numeric, special);
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 
 }
-
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
@@ -32,31 +34,37 @@ function generatePassword(length, lowerCase, upperCase, numeric, special) {
   var characters = "!#$%&()*+,-./:;<=>?@[\]^_`{|}~"
   var password = ""
 
-
-
   for (var i=0; i < length;) {
-    if (lowerCase === "yes" && i < length) {
+    if (lowerCase.toLowerCase() === "yes" && i < length) {
       password +=alphabetLower[Math.floor(Math.random()* alphabetLower.length)]
       i++
     }
 
-    if (upperCase === "yes" && i < length) {
+    if (upperCase.toLowerCase() === "yes" && i < length) {
       password +=alphabetUpper[Math.floor(Math.random()* alphabetUpper.length)]
       i++
     }
-    if (numeric === "yes" && i < length) {
+    if (numeric.toLowerCase() === "yes" && i < length) {
       password +=numbers[Math.floor(Math.random()* numbers.length)]
       i++
     }
-    if (special === "yes" && i < length) {
+    if (special.toLowerCase() === "yes" && i < length) {
       password +=characters[Math.floor(Math.random()* characters.length)]
       i++
     }
-
-
   }
+  password = shuffle(password)
+  return password
+}
 
-  console.log(password)
+function shuffle(password) {
+  var shuffledPassword = password.split('')
 
-
+  for (let i = shuffledPassword.length -1; i > 0; i--) {
+    let randomIndex = Math.floor(Math.random() * i)
+    let initialValue = shuffledPassword[i]
+    shuffledPassword[i] = shuffledPassword[randomIndex]
+    shuffledPassword[randomIndex] = initialValue    
+  }
+  return shuffledPassword.join("");
 }
