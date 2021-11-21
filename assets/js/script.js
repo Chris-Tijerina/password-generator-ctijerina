@@ -73,7 +73,7 @@ function generatePassword(length, lowerCase, upperCase, numeric, special) {
   var alphabetLower = "abcdefghijklmnopqrstuvwxyz"
   var alphabetUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   var numbers = "0123456789"
-  var characters = "!#$%&()*+,-./:;<=>?@[\]^_`{|}~"
+  var characters = "!#$%&()*+,-.:;<=>@"
   var password = ""
 
   for (var i = 0; i < length;) {
